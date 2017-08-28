@@ -1,0 +1,30 @@
+<Sessions>
+    <Session>
+        <id>18413-2</id>
+        <Name>Microsoft PowerShell for the NetApp Storage Administrator</Name>
+        <Location>NEED</Location>
+        <Presenters>
+            <Presenter>Joseph</Presenter>
+            <Presenter>Jason</Presenter>
+        </Presenters>
+        <Members>
+            <Member>Pen</Member>
+            <Member>Joseph</Member>
+            <Member>Jason</Member>
+        </Members>
+    </Session>
+    <Session>
+        <id>18404-2</id>
+        <Name>NetAppDocs Customizing the Health-Check Framework for Your Environment</Name>
+        <Location>NEED</Location>
+        <Presenters>
+            <Presenter>Joseph</Presenter>
+            <Presenter>Jason</Presenter>
+        </Presenters>
+        <Members>
+            <Member>Pen</Member>
+            <Member>Joseph</Member>
+            <Member>Jason</Member>
+        </Members>
+    </Session>
+</Sessions>
