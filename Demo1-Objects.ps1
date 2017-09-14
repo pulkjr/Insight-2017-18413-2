@@ -7,7 +7,7 @@
     $Jason | Get-Member
 
 # In this example we are building a person object. Think of the properties of a physical person.
-# Name, Heigh, Haircolor... 
+# Name, Heigh, Haircolor...
 # You set these by either using the Add-Members function or by adding the members during instantiation.
     $Jason = [pscustomobject]@{
         Name           = "Jason";
@@ -42,7 +42,7 @@
 #
 # These objects are nice by themselves but now these people are attending a great insight session. Lets put them together in an array.
 
-# This command can be used to instantiate an array. 
+# This command can be used to instantiate an array.
     $sessionAttendees = @()
     $sessionAttendees.gettype()
 # Again everything is an object in PowerShell, so lets show the methods and properties of an array
@@ -97,7 +97,7 @@
             TypeName       = 'NetApp.Insight.Attendee'
             Name           = $Name
             Height         = $Height
-            Haircolor      = $HairColor
+            HairColor      = $HairColor
             CurrentSession = $CurrentSession
             IsPresenter    = $IsPresenter
             Company        = $Company

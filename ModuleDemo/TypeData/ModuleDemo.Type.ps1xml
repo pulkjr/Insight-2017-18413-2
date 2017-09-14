@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Types>
+  <Type>
+    <Name>ModuleDemo.Volume</Name>
+    <Members>
+      <MemberSet>
+        <Name>PSStandardMembers</Name>
+        <Members>
+          <PropertySet>
+            <Name>DefaultDisplayPropertySet</Name>
+            <ReferencedProperties>
+              <Name>Name</Name>
+              <Name>Vserver</Name>
+              <Name>SnapshotCount</Name>
+              <Name>SecurityStyle</Name>
+              <Name>VolumeType</Name>
+              <Name>Aggregate</Name>
+              <Name>TotalSizeInMb</Name>
+            </ReferencedProperties>
+          </PropertySet>
+        </Members>
+      </MemberSet>
+      <ScriptProperty>
+        <Name>SnapshotCount</Name>
+        <GetScriptBlock>$this.VolumeSnapshotAttributes.SnapshotCount</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>SecurityStyle</Name>
+        <GetScriptBlock>$this.VolumeSecurityAttributes.Style</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>VolumeType</Name>
+        <GetScriptBlock>$this.VolumeIdAttributes.Type</GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>TotalSizeInMb</Name>
+        <GetScriptBlock>[long]$this.VolumeSpaceAttributes.SizeTotal / 1mb</GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>

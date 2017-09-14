@@ -1,4 +1,4 @@
-function New-NtapDataVolume4 {
+function New-NtapDataVolume {
     <#
         .SYNOPSIS
             Create a new ONTAP data volume based on the protocol specified.
