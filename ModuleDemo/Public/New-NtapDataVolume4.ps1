@@ -1,31 +1,37 @@
-function New-NtapDataVolume {
+function New-NtapDataVolume4 {
     <#
         .SYNOPSIS
-        Short description
+            Create a new ONTAP data volume based on the protocol specified.
 
         .DESCRIPTION
-        Long description
+            Create a new ONTAP data volume with appropriate settings applied based on the protocol specified.
 
         .PARAMETER Controller
-        Parameter description
+            The controller object
 
         .PARAMETER Name
-        Parameter description
+            The name of the volume
 
         .PARAMETER Vserver
-        Parameter description
+            The SVM name to create the volume in
 
         .PARAMETER Size
-        Parameter description
+            The size of the volume
 
-        .PARAMETER Application
-        Parameter description
+        .PARAMETER Protocol
+            The protocol the volume will be accessed by
 
         .EXAMPLE
-        An example
+            PS C:\> $controller = Connect-NcController -Name vm-cdot -Credential (Get-Credential)
+            PS C:\> New-NtapDataVolume -Controller $controller -Name CifsTest1 -Vserver InsightSVM -Size 10g -Protocol CIFS
 
-        .NOTES
-        General notes
+            Connect to the cluster 'vm-cdot' and creates the specified volume.
+
+        .INPUTS
+            none
+
+        .OUTPUTS
+            DataONTAP.C.Types.Volume.VolumeAttributes
     #>
 
     [CmdletBinding()]
@@ -44,7 +50,7 @@ function New-NtapDataVolume {
 
         [Parameter(Mandatory)]
         [ValidateSet('CIFS', 'NFS')]
-        [string]$Application
+        [string]$Protocol
     )
 
     if (-not (Get-NcVserver -Vserver $Vserver -Controller $controller)) {
@@ -70,7 +76,7 @@ function New-NtapDataVolume {
         Size         = $Size
     }
 
-    switch -exact ($Application) {
+    switch -exact ($Protocol) {
         'CIFS' {
             $params.Add('SecurityStyle', 'ntfs')
         }
