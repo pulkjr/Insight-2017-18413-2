@@ -1,5 +1,14 @@
-# A Person enters the session lets record their properties
+# An object can be anything that has properties. A base object is the psclustomobject or psobject.
+# The following command creates the base object
+    $Jason = [pscustomobject]@{}
 
+# With the base object instantiated we can now view what it's type to validate what it is and what properties it has.
+    $Jason.GetType()
+    $Jason | Get-Member
+
+# In this example we are building a person object. Think of the properties of a physical person.
+# Name, Heigh, Haircolor... 
+# You set these by either using the Add-Members function or by adding the members during instantiation.
     $Jason = [pscustomobject]@{
         Name           = "Jason";
         Height         = 72;
@@ -10,10 +19,13 @@
         JobTitle       = "Professional Services Consultant"
     }
 
+# With the object now created lets display the object and list the properties.
     $Jason
+    $Jason.GetType()
+    $Jason | Get-Member
 
-#
-#Another Person enters session
+
+# Let's instantiate another person
 
     $Joseph = [pscustomobject]@{
         Name           = "Joseph"
@@ -28,47 +40,48 @@
     $Joseph
 
 #
-#I need a place to hold all of these people.
+# These objects are nice by themselves but now these people are attending a great insight session. Lets put them together in an array.
 
+# This command can be used to instantiate an array. 
     $sessionAttendees = @()
+    $sessionAttendees.gettype()
+# Again everything is an object in PowerShell, so lets show the methods and properties of an array
+    Get-Member -InputObject $sessionAttendees
+
+# Now that we have an array let's add an object to it.
     $sessionAttendees += $Jason
     $sessionAttendees += $Joseph
+
+# We can now see the two attendees of this session
     $sessionAttendees
 
-#
-#I now have an array of objects. I can validate this by running the following method
-
+# We now have an array of objects.
     $sessionAttendees.GetType()
 
-#
-#I can filter the array using the where-object statement
+# I can view the members of the objects by sending each object over the pipline and retrieving the members
+    $sessionAttendees | Get-Member
 
+# Notice that when I view the members of the sessionAttendees object that this is an array type and not a pscustomobject.
+    Get-Member -InputObject $sessionAttendees
+
+# I can now use the pipeline to filter the objects that I see on screen or that I send to the next command over the pipeline.
+# This is done using the Where-Object function.
     $sessionAttendees | Where-Object { $_.Name -eq "Jason" }
 
-#
-#I can put jason back into a variable
-
+# I can now put Jason into a difference variable and show the content.
     $JasonObj = $sessionAttendees | Where-Object { $_.Name -eq "Jason" }
     $JasonObj
 
-#
-#I can see that Jason's name is also an object (string)
-
-    $JasonObj.Name.GetType()
-
-#
-#I can update a property of Jason and it will reflect back to the object in the array, as they are one in the same.
+# I can update a property of Jason and it will reflect back to the object in the array, as they are one in the same.
     $JasonObj.Company = "The Best Company... NETAPP"
     $JasonObj
 
-    $sessionAttendees
+    $sessionAttendees  | Where-Object { $_.Name -eq "Jason" }
 
     $JasonObj.Company = "NetApp"
     $JasonObj
 
-#
 # That was fun but I need a way to make these people faster as there are a lot of us. Lets create a function
-
     function New-Person {
         param(
             $Name,
@@ -92,4 +105,4 @@
         }
     }
 
-#
+# Now how does this apply to NetApp?
