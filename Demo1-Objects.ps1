@@ -1,11 +1,3 @@
-# An object can be anything that has properties. A base object is the psclustomobject or psobject.
-# The following command creates the base object
-    $Jason = [pscustomobject]@{}
-
-# With the base object instantiated we can now view what it's type to validate what it is and what properties it has.
-    $Jason.GetType()
-    $Jason | Get-Member
-
 # In this example we are building a person object. Think of the properties of a physical person.
 # Name, Heigh, Haircolor... 
 # You set these by either using the Add-Members function or by adding the members during instantiation.
@@ -23,6 +15,24 @@
     $Jason
     $Jason.GetType()
     $Jason | Get-Member
+
+# Even Properties have types. Notice that we didn't specify the types of these properties!
+# Remember types can cause you problems if you let PowerShell decide for you.
+# PowerShell is not strongly typed!
+    $Jason.Name.GetType()
+    $Jason.Name | Get-Member
+
+    $Jason.Height.GetType()
+    $Jason.Height
+    $Jason.Height * 2
+    $Jason.Height = '72'
+    $Jason.Height.GetType()
+    $Jason.Height * 2
+    $Jason.Height = [int]'72'
+    $Jason.Height = [int]'72a'
+    $Jason.Height.GetType()
+
+    $Jason.IsPresenter.GetType()
 
 
 # Let's instantiate another person
