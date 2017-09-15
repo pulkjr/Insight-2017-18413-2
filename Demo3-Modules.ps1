@@ -1,7 +1,15 @@
-Import-Module .\ModuleDemo\ModuleDemo.psd1 -Force
+#region Modules
 
-Get-Command -Module ModuleDemo
+    ## Import our custom module
+    Import-Module .\ModuleDemo\ModuleDemo.psd1
 
-$controller = Connect-NcController -Name den-cdot
+    ## List the functions that are available from this module
+    Get-Command -Module ModuleDemo
 
-Get-NtapDataVolume -Controller $controller -Vserver InsightSVM
+    ## Connect to the cluster
+    $controller = Connect-NcController -Name den-cdot
+
+    ## Get the list of volumes using the custom type and format definitions
+    Get-NtapDataVolume -Controller $controller -Vserver InsightSVM
+
+#endregion
