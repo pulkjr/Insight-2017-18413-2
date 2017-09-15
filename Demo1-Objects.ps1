@@ -17,10 +17,12 @@
     $Jason | Get-Member
 
 # Even Properties have types. Notice that we didn't specify the types of these properties!
-# Remember types can cause you problems if you let PowerShell decide for you.
+# Remember types can cause you problems if you let PowerShell decide for you. PowerShell = Adaptive Type System
 # PowerShell is not strongly typed!
     $Jason.Name.GetType()
     $Jason.Name | Get-Member
+
+    $Jason.IsPresenter.GetType()
 
     $Jason.Height.GetType()
     $Jason.Height
@@ -28,11 +30,6 @@
     $Jason.Height = '72'
     $Jason.Height.GetType()
     $Jason.Height * 2
-    $Jason.Height = [int]'72'
-    $Jason.Height = [int]'72a'
-    $Jason.Height.GetType()
-
-    $Jason.IsPresenter.GetType()
 
 # Let's instantiate another person
 
@@ -90,29 +87,5 @@
 
     $JasonObj.Company = "NetApp"
     $JasonObj
-
-# That was fun but I need a way to make these people faster as there are a lot of us. Lets create a function
-    function New-Person {
-        param(
-            $Name,
-            $Height,
-            $HairColor,
-            $CurrentSession,
-            $IsPresenter,
-            $Company,
-            $JobTitle
-        )
-
-        [pscustomobject]@{
-            TypeName       = 'NetApp.Insight.Attendee'
-            Name           = $Name
-            Height         = $Height
-            HairColor      = $HairColor
-            CurrentSession = $CurrentSession
-            IsPresenter    = $IsPresenter
-            Company        = $Company
-            JobTitle       = $JobTitle
-        }
-    }
 
 # Now how does this apply to NetApp?
