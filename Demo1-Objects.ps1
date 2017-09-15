@@ -1,10 +1,10 @@
 # In this example we are building a person object. Think of the properties of a physical person.
-# Name, Heigh, Haircolor...
+# Name, Height, HairColor...
 # You set these by either using the Add-Members function or by adding the members during instantiation.
     $Jason = [pscustomobject]@{
         Name           = "Jason";
         Height         = 72;
-        Haircolor      = "Brown";
+        HairColor      = "Brown";
         CurrentSession = "PowerShell";
         IsPresenter    = $true;
         Company        = "NetApp";
@@ -34,13 +34,12 @@
 
     $Jason.IsPresenter.GetType()
 
-
 # Let's instantiate another person
 
     $Joseph = [pscustomobject]@{
         Name           = "Joseph"
         Height         = 69
-        Haircolor      = "Brown"
+        HairColor      = "Brown"
         CurrentSession = "PowerShell"
         IsPresenter    = $true
         Company        = "NetApp"
@@ -55,6 +54,7 @@
 # This command can be used to instantiate an array.
     $sessionAttendees = @()
     $sessionAttendees.gettype()
+
 # Again everything is an object in PowerShell, so lets show the methods and properties of an array
     Get-Member -InputObject $sessionAttendees
 
