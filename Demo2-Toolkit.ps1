@@ -16,14 +16,6 @@
     ## This creates a global variable with the connection object
     $Global:CurrentNcController
 
-    ## Remove that global variable and show the -Transient switch
-    Remove-Variable -Name CurrentNcController
-
-    ## This will not create the global variable
-    $controller = Connect-NcController -Name 'den-cdot' -Transient
-
-    $Global:CurrentNcController
-
 #endregion
 
 #region Help
@@ -42,44 +34,23 @@
 
 #endregion
 
-#region Volume and properties
-
-    ## Gather all volumes into the $vols variable
-    $vols = Get-NcVol
-
-    $vols
-
-    ## Let's just look at one of them
-    $vol = $vols | Select-Object -Index 1
-
-    $vol
-
-    $vol | Get-Member
-
-    $vol.VolumeStateAttributes
-
-#endregion
-
 #region Offline volumes
 
     ## This asks the cluster for all volumes, once PowerShell receives them it sends them over the pipeline
     ## it then queries each object to see if it is offline
-    Get-NcVol | Where-Object { $_.State -eq "Offline" }
-
-    #Get-NcVol | Where-Object { $_.VolumeStateAttributes.State -eq "Offline" }
+    Get-NcVol | Where-Object { $_.State -eq "offline" }
+    Get-NcVol | Where-Object { $_.VolumeStateAttributes.State -eq "offline" }
 
     ## This tells the cluster (mgwd) to query it's local vldb for offline volumes.
     $queryAttributes = Get-NcVol -Template -Fill
-    $queryAttributes.VolumeStateAttributes.State = 'Offline'
+    $queryAttributes.VolumeStateAttributes.State = 'offline'
     Get-NcVol -Query $queryAttributes
 
     ## Another way to do the same
-    Get-NcVol -Query @{ State = "Offline" }
-
-    $vol | Get-Member
+    Get-NcVol -Query @{ State = "offline" }
 
     ## Set Volumes to Online
-    Get-NcVol -Query @{ State = "Offline" } | Set-NcVol -Online
+    Get-NcVol -Query @{ State = "offline" } | Set-NcVol -Online
 
     ## Set offline again
     Get-NcVol -Vserver vs_doug -Name test | Set-NcVol -Offline
@@ -93,7 +64,7 @@
     Get-NcAggr
 
     ## Does this volume exist?
-    Get-NcVol -Name 'InsightVol1'
+    Get-NcVol -Name 'InsightVol1' -Vserver InsightSVM
 
     ## Let's create the new volume
     New-NcVol -VserverContext 'InsightSVM' -Name 'InsightVol1' -JunctionPath '/InsightVol1' -Aggregate 'n1_aggr1' -Size '1g'
@@ -126,6 +97,7 @@
 #region Volume bulk delete
 
     ## Delete the volumes
+    Get-NcVol -Name 'InsightVol1', 'InsightVol2', 'InsightVol3', 'InsightVol4' -Vserver 'InsightSVM' | Dismount-NcVol | Set-NcVol -Offline | Remove-NcVol -Whatif
     Get-NcVol -Name 'InsightVol1', 'InsightVol2', 'InsightVol3', 'InsightVol4' -Vserver 'InsightSVM' | Dismount-NcVol | Set-NcVol -Offline | Remove-NcVol -Confirm:$false
 
     #::> vol unmount -vserver InsightSVM -volume InsightVol1
@@ -173,28 +145,6 @@
         }
 
         New-NcVol -VserverContext $Vserver -Name $Name -Aggregate $Aggregate -Size $Size
-    }
-
-#endregion
-
-#region Better new volume function
-
-    ## 'dot-source' in the function from the script file
-    . .\New-NtapDataVolume3.ps1
-
-    ## Connect to the cluster and capture the controller object
-    $controller = Connect-NcController -Name den-cdot -Transient
-
-    ## Call the new function. Specify the controller object and the other necessary parameters
-    New-NtapDataVolume3 -Controller $controller -Name 'TestCifs1' -Vserver 'InsightSVM' -Aggregate 'n1_aggr1' -Size '1g' -Protocol 'CIFS'
-
-    ## Make sure the property was set correctly
-    Get-NcVol -Name TestCifs1 -Vserver InsightSVM | Format-Table -AutoSize -Property Vserver, Name, State, @{
-        Name       = 'SecurityStyle'
-        Expression = { $_.VolumeSecurityAttributes.Style }
-    }, @{
-        Name       = 'TotalSize'
-        Expression = { ConvertTo-FormattedNumber -Value $_.VolumeSpaceAttributes.SizeTotal -Type DataSize -NumberFormatString '0.00' }
     }
 
 #endregion

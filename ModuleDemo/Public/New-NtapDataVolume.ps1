@@ -46,6 +46,9 @@ function New-NtapDataVolume {
         [string]$Vserver,
 
         [Parameter(Mandatory)]
+        [string]$Aggregate,
+
+        [Parameter(Mandatory)]
         [string]$Size,
 
         [Parameter(Mandatory)]
@@ -69,11 +72,11 @@ function New-NtapDataVolume {
     }
 
     $params = @{
-        Name         = $Name
-        Vserver      = $Vserver
-        Aggregate    = $Aggregate
-        JunctionPath = "/$Name"
-        Size         = $Size
+        Name           = $Name
+        VserverContext = $Vserver
+        Aggregate      = $Aggregate
+        JunctionPath   = "/$Name"
+        Size           = $Size
     }
 
     switch -exact ($Protocol) {

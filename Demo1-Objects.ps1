@@ -115,4 +115,24 @@
         }
     }
 
-# Now how does this apply to NetApp?
+#region Volume and properties
+
+    Import-Module DataONTAP
+
+    Connect-NcController -Name den-cdot
+
+    ## Gather all volumes into the $vols variable
+    $vols = Get-NcVol
+
+    $vols
+
+    ## Let's just look at one of them
+    $vol = $vols | Select-Object -First 1
+
+    $vol
+
+    $vol | Get-Member
+
+    $vol.VolumeStateAttributes
+
+#endregion
