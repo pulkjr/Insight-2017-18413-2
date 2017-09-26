@@ -93,11 +93,46 @@
 
 #
 
+#region import/credentials
+
+    ## First we must import the module
+        Import-Module DataONTAP
+    
+        Get-Module -Name DataONTAP
+
+        ## View the commands in the Data Ontap Module dealing with volumes
+        Get-Command -Module DataONTAP -Name '*vol*'
+        
+        ## Show the help for that command
+        Get-Help -Name Get-NcVol -Full
+        
+        ## Show the webhelp
+        Show-NcHelp
+
+        # Remove-NcCredential -Name 'den-cdot'
+    
+        ## Now we need to connect to a cluster
+        Connect-NcController -Name 'den-cdot' #-Credential (Get-Credential)
+
+        ## Using cached credentials, we can omit the -Credential parameter
+        Add-NcCredential -Name 'den-cdot' #-Credential (Get-Credential)
+    
+        Get-NcCredential
+    
+        ## This creates a global variable with the connection object
+        $Global:CurrentNcController
+    
+    #endregion
+    
+    #region Help
+    
+        
+    
+        
+    
+    #endregion
+
 #region Volume and properties
-
-    Import-Module DataONTAP
-
-    Connect-NcController -Name den-cdot
 
     ## Gather all volumes into the $vols variable
     $vols = Get-NcVol
