@@ -1,4 +1,4 @@
-#region
+#region - Basics of Objects
     # In this example we are building a person object. Think of the properties of a physical person.
     # Name, Height, HairColor...
     # You set these by either using the Add-Members function or by adding the members during instantiation.
@@ -49,7 +49,7 @@
 
         $Joseph
 #endregion
-#region
+#region - Using Arrays
     # These objects are nice by themselves but now these people are attending a great insight session. Lets put them together in an array.
 
     # This command can be used to instantiate an array.
@@ -94,7 +94,7 @@
 
 #endregion
 
-#region import/credentials
+#region Importing Module, Finding Commands, and Connecting to Controllers
 
     ## First we must import the module
         Import-Module DataONTAP
@@ -125,7 +125,7 @@
     
 #endregion
 
-#region Volume and properties
+#region DataONTAP Toolkit uses Objects too!!
 
     ## Gather all volumes into the $vols variable
     $vols = Get-NcVol
