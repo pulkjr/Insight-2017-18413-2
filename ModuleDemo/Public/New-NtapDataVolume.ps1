@@ -61,7 +61,7 @@ function New-NtapDataVolume {
         return
     }
 
-    if (-not (Get-NcAggr -Name $Aggregate -Controller $controller -EA Ignore)) {
+    if (-not (Get-NcAggr -Name $Aggregate -Controller $controller -ErrorAction Ignore)) {
         Write-Error -Message "Aggregate not found: $Aggregate"
         return
     }
@@ -81,12 +81,17 @@ function New-NtapDataVolume {
 
     switch -exact ($Protocol) {
         'CIFS' {
-            $params.Add('SecurityStyle', 'ntfs')
+            $outputVol = New-NcVol @params -SecurityStyle 'ntfs' -Controller $Controller
+
+            ## Add-NcCifsShare
+            ## Enable-NcVscan
+
+            $outputVol
         }
         'NFS' {
-            $params.Add('SecurityStyle', 'unix')
+            $outputVol = New-NcVol @params -SecurityStyle 'unix' -ExportPolicy 'ExportPol1' -Controller $Controller
+
+            $outputVol
         }
     }
-
-    New-NcVol @params -Controller $Controller
 }

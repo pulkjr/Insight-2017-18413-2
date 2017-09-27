@@ -15,7 +15,7 @@ Function Get-NtapDataVolume {
         [Parameter(Mandatory)]
         [NetApp.Ontapi.AbstractController]$Controller,
 
-        [Parameter(Mandatory)]
+        [Parameter()]
         [string]$Vserver,
 
         [Parameter()]

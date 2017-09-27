@@ -1,4 +1,5 @@
 #region - Basics of Objects
+
     # In this example we are building a person object. Think of the properties of a physical person.
     # Name, Height, HairColor...
     # You set these by either using the Add-Members function or by adding the members during instantiation.
@@ -48,8 +49,11 @@
         }
 
         $Joseph
+
 #endregion
+
 #region - Using Arrays
+
     # These objects are nice by themselves but now these people are attending a great insight session. Lets put them together in an array.
 
     # This command can be used to instantiate an array.
@@ -98,47 +102,47 @@
 
     ## First we must import the module
         Import-Module DataONTAP
-    
+
         Get-Module -Name DataONTAP
 
-        ## View the commands in the Data Ontap Module dealing with volumes
+    ## View the commands in the Data Ontap Module dealing with volumes
         Get-Command -Module DataONTAP -Name '*vol*'
-        
-        ## Show the help for that command
+
+    ## Show the help for that command
         Get-Help -Name Get-NcVol -Full
-        
-        ## Show the webhelp
+
+    ## Show the webhelp
         Show-NcHelp
 
-        # Remove-NcCredential -Name 'den-cdot'
-    
-        ## Now we need to connect to a cluster
-        Connect-NcController -Name 'den-cdot' #-Credential (Get-Credential)
+    # Remove-NcCredential -Name 'den-cdot'
 
-        ## Using cached credentials, we can omit the -Credential parameter
-        Add-NcCredential -Name 'den-cdot' #-Credential (Get-Credential)
-    
+    ## Now we need to connect to a cluster
+        Connect-NcController -Name 'den-cdot' -Credential (Get-Credential)
+
+    ## Using stored credentials, we can omit the -Credential parameter
+        Add-NcCredential #-Name 'den-cdot' -Credential (Get-Credential)
+
         Get-NcCredential
-    
-        ## This creates a global variable with the connection object
+
+    ## This creates a global variable with the connection object
         $Global:CurrentNcController
-    
+
 #endregion
 
 #region DataONTAP Toolkit uses Objects too!!
 
     ## Gather all volumes into the $vols variable
-    $vols = Get-NcVol
+        $vols = Get-NcVol
 
-    $vols
+        $vols
 
     ## Let's just look at one of them
-    $vol = $vols | Select-Object -First 1
+        $vol = $vols | Select-Object -First 1
 
-    $vol
+        $vol
 
-    $vol | Get-Member
+        $vol | Get-Member
 
-    $vol.VolumeStateAttributes
+        $vol.VolumeStateAttributes
 
 #endregion
