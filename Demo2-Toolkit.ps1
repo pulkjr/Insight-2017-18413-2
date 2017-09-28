@@ -27,7 +27,7 @@
 #region New Volume
 
     ## Create new volume
-    ## The new volume creation command requires the aggregate name informataion. Lets see what aggregates there are and how much space there is available.
+    ## The new volume creation command requires the aggregate name information. Lets see what aggregates there are and how much space there is available.
         Get-NcAggr
 
     ## Create volume 'InsightVol1' .. Does this volume exist?
