@@ -132,6 +132,9 @@
 #region DataONTAP Toolkit uses Objects too!!
 
     ## Gather all volumes into the $vols variable
+    # This sends a ZAPI call to the cluster for volumes
+    # The toolkit takes the returned API and puts it in an object format.
+
         $vols = Get-NcVol
 
         $vols
@@ -143,6 +146,10 @@
 
         $vol | Get-Member
 
-        $vol.VolumeStateAttributes
+        # This is not an actual property from ZAPI
+        $vol.state
+
+        # This is the actual property
+        $vol.VolumeStateAttributes.state
 
 #endregion
