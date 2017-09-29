@@ -4,12 +4,12 @@
     # Name, Height, HairColor...
     # You set these by either using the Add-Members function or by adding the members during instantiation.
         $Jason = [pscustomobject]@{
-            Name           = "Jason";
-            Height         = 72;
-            HairColor      = "Brown";
-            CurrentSession = "PowerShell";
-            IsPresenter    = $true;
-            Company        = "NetApp";
+            Name           = "Jason"
+            Height         = 72
+            HairColor      = "Brown"
+            CurrentSession = "PowerShell"
+            IsPresenter    = $true
+            Company        = "NetApp"
             JobTitle       = "Professional Services Consultant"
         }
 
@@ -24,6 +24,8 @@
         $Jason.Name.GetType()
         $Jason.Name | Get-Member
 
+        $Jason.IsPresenter.GetType()
+
         $Jason.Height.GetType()
         $Jason.Height
         $Jason.Height * 2
@@ -33,8 +35,6 @@
         $Jason.Height = [int]'72'
         $Jason.Height = [int]'72a'
         $Jason.Height.GetType()
-
-        $Jason.IsPresenter.GetType()
 
     # Let's instantiate another person
 
@@ -147,9 +147,9 @@
         $vol | Get-Member
 
         # This is not an actual property from ZAPI
-        $vol.state
+        $vol.State
 
         # This is the actual property
-        $vol.VolumeStateAttributes.state
+        $vol.VolumeStateAttributes.State
 
 #endregion

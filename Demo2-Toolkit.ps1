@@ -10,6 +10,8 @@
 
     ## This tells the cluster (mgwd) to query it's local vldb for offline volumes.
         $queryAttributes = Get-NcVol -Template -Fill
+        $queryAttributes
+
         $queryAttributes.VolumeStateAttributes.State = 'offline'
         Get-NcVol -Query $queryAttributes
 
@@ -37,7 +39,7 @@
         New-NcVol -VserverContext 'InsightSVM' -Name 'InsightVol1' -JunctionPath '/InsightVol1' -Aggregate 'n1_aggr1' -Size '1g'
 
     ## Bulk add volumes by using the ForEach-Object cmdlet
-        'InsightVol3', 'InsightVol4' | ForEach-Object {
+        'InsightVol2', 'InsightVol3' | ForEach-Object {
             New-NcVol -Name $_ -VserverContext 'InsightSVM' -JunctionPath "/$_" -Aggregate 'n1_aggr1' -Size '1g'
         }
 

@@ -25,7 +25,7 @@
 ## Clean up our demo environment
 
 ## Delete the volumes
-    Get-NcVol -Name 'InsightVol1', 'InsightVol2', 'InsightVol3', 'InsightVol4', 'TestCifs1', 'TestNfs1' -Vserver 'InsightSVM' | Dismount-NcVol | Set-NcVol -Offline | Remove-NcVol -Confirm:$false
+    Get-NcVol -Name 'InsightVol1', 'InsightVol2', 'InsightVol3', 'TestCifs1', 'TestNfs1' -Vserver 'InsightSVM' | Dismount-NcVol | Set-NcVol -Offline | Remove-NcVol -Confirm:$false
 
     #::> vol unmount -vserver InsightSVM -volume InsightVol1
     #::> vol offline -vserver InsightSVM -volume InsightVol1
