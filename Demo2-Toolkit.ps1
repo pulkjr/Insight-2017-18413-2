@@ -36,16 +36,6 @@
     ## Let's create the new volume
         New-NcVol -VserverContext 'InsightSVM' -Name 'InsightVol1' -JunctionPath '/InsightVol1' -Aggregate 'n1_aggr1' -Size '1g'
 
-    ## Let's create another volume, this time using 'splatting'
-        $params = @{
-            Name         = 'InsightVol2'
-            JunctionPath = '/InsightVol2'
-            Aggregate    = 'n1_aggr1'
-            Size         = '1g'
-        }
-
-        New-NcVol @params -VserverContext 'InsightSVM'
-
     ## Bulk add volumes by using the ForEach-Object cmdlet
         'InsightVol3', 'InsightVol4' | ForEach-Object {
             New-NcVol -Name $_ -VserverContext 'InsightSVM' -JunctionPath "/$_" -Aggregate 'n1_aggr1' -Size '1g'
