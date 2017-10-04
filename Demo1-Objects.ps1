@@ -144,6 +144,8 @@
 
         $vol
 
+        $vol.gettype()
+
         $vol | Get-Member
 
         # This is not an actual property from ZAPI
@@ -151,5 +153,9 @@
 
         # This is the actual property
         $vol.VolumeStateAttributes.State
+
+        $volLessDetails = $vol | select Name,State
+
+        $volLessDetails.gettype()
 
 #endregion
