@@ -1,8 +1,5 @@
 #region Offline volumes
 
-    ## Show the toolkit help for that command
-        Get-NcHelp -Cmdlet Get-NcVol
-
     ## This asks the cluster for all volumes, once PowerShell receives them it sends them over the pipeline
     ## it then queries each object to see if it is offline
         Get-NcVol | Where-Object { $_.State -eq "offline" }
@@ -23,6 +20,9 @@
 
     ## Set offline again
         Get-NcVol -Vserver InsightSVM -Name testoffline | Set-NcVol -Offline
+
+    ## Show the toolkit help for that command
+        Get-NcHelp -Cmdlet Get-NcVol
 
 #endregion
 
