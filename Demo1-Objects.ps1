@@ -114,8 +114,6 @@
     ## Show the webhelp
         Show-NcHelp
 
-    # Remove-NcCredential -Name 'den-cdot'
-
     ## Now we need to connect to a cluster
         Connect-NcController -Name 'den-cdot' -Credential (Get-Credential)
 
